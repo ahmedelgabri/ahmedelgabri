@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// 👆 Used to tell Node.js that this is a CLI tool
 
 // Pull in our modules
 const chalk = require('chalk')
@@ -33,7 +32,6 @@ const data = {
 }
 
 // Actual strings we're going to output
-const newline = '\n'
 const heading = `${data.name} ${data.handle}`
 const working = `${data.labelWork}  ${data.work}`
 const twittering = `${data.labelTwitter}  ${data.twitter}`
@@ -43,21 +41,15 @@ const webing = `${data.labelWeb}  ${data.web}`
 const carding = `${data.labelCard}  ${data.npx}`
 
 // Put all our output together into a single variable so we can use boxen effectively
-const output =
-  heading +
-  newline +
-  newline +
-  working +
-  newline +
-  twittering +
-  newline +
-  githubing +
-  newline +
-  linkedining +
-  newline +
-  webing +
-  newline +
-  newline +
-  carding
+const output = `${heading}
+
+  ${working}
+  ${twittering}
+  ${githubing}
+  ${linkedining}
+  ${webing}
+
+
+  ${carding}`
 
 console.log(chalk.green(boxen(output, options)))

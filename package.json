@@ -1,26 +1,40 @@
 {
   "name": "ahmedelgabri",
+  "author": "Ahmed El Gabri <ahmed@gabri.me> (https://gabri.me)",
   "version": "2.0.1",
   "description": "A personal card for Ahmed El Gabri (@ahmedelgabri)",
-  "main": "index.js",
+  "license": "MIT",
+  "homepage": "https://gabri.me",
+  "main": "/bin/card.js",
   "bin": {
     "ahmedelgabri": "./bin/card.js"
   },
+  "scripts": {
+    "start": "node ./bin/card.js",
+    "lint": "standard"
+  },
+  "keywords": [
+    "card",
+    "npm",
+    "npm card",
+    "npx",
+    "npx card",
+    "business card"
+  ],
+  "files": [
+    "bin/card.js"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bnb/bitandbang.git"
+    "url": "git+https://github.com/ahmedelgabri/ahmedelgabri.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/ahmedelgabri/ahmedelgabri/issues"
   },
-  "keywords": [],
-  "author": "Ahmed El Gabri <ahmed@gabri.me> (https://gabri.me)",
-  "license": "MIT",
-  "dependencies": {
-    "boxen": "^2.1.0",
-    "chalk": "^2.4.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "boxen": "^4.0.0",
+    "chalk": "^2.4.2",
     "standard": "^12.0.1"
   }
 }
