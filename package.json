@@ -25,7 +25,8 @@
     "business card"
   ],
   "files": [
-    "bin/card.js"
+    "bin/card.js",
+    "bin/output"
   ],
   "repository": {
     "type": "git",
