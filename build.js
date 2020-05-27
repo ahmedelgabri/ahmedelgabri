@@ -16,9 +16,7 @@ const options = {
 const data = {
   name: chalk.white('Ahmed El Gabri /'),
   handle: chalk.cyan('ahmedelgabri'),
-  work: chalk.white(
-    'Principal Software Developer, Front-End (JavaScript) @LightspeedHQ',
-  ),
+  work: chalk.white('Tech Lead, Platform @Miro'),
   twitter: chalk.cyan('https://twitter.com/ahmedelgabri'),
   github: chalk.cyan('https://github.com/ahmedelgabri'),
   linkedin: chalk.cyan('https://linkedin.com/in/ahmedelgabri'),
