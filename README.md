@@ -1,12 +1,13 @@
-It's me, Ahmed! Based on https://github.com/bnb/bitandbang
-
-# Usage
-
-Via npx:
-
-```
-npx ahmedelgabri
-```
-
-Not including how to use it globally because I'm not sure why you'd want this as
-a global command. That'd be creepy.
+<div align="center">
+	<br>
+	<br>
+	<br>
+	<br>
+  <img  src="http://www.nyan.cat/cats/original.gif" />
+  <br>
+  <pre><code>npx ahmedelgabri</code></pre>
+	<br>
+	<br>
+	<br>
+	<br>
+</div>
