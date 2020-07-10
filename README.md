@@ -3,11 +3,9 @@
 	<br>
 	<br>
 	<br>
-  <img  src="http://www.nyan.cat/cats/original.gif" />
+  <img  src="http://www.nyan.cat/cats/original.gif" width="150" />
   <br>
+<br>
+<br>
   <pre><code>npx ahmedelgabri</code></pre>
-	<br>
-	<br>
-	<br>
-	<br>
 </div>
