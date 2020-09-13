@@ -7,5 +7,9 @@
   <br>
 <br>
 <br>
+  <pre><code>curl -L gabri.me/api/card</code></pre>
+	or
+	<br>
+	<br>
   <pre><code>npx ahmedelgabri</code></pre>
 </div>
