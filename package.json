@@ -5,8 +5,7 @@
   "description": "A personal card for Ahmed El Gabri (@ahmedelgabri)",
   "license": "MIT",
   "homepage": "https://gabri.me",
-  "main": "index.cjs.js",
-  "browser": "index.js",
+  "main": "index.js",
   "bin": {
     "ahmedelgabri": "./bin/card.js"
   },
@@ -27,8 +26,7 @@
   "files": [
     "bin/card.js",
     "bin/output",
-    "index.js",
-    "index.cjs.js"
+    "index.js"
   ],
   "repository": {
     "type": "git",
