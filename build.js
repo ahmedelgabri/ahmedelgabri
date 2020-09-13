@@ -4,7 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const boxen = require('boxen')
-const prettier = require('prettier')
 
 // Define options for Boxen
 const options = {
@@ -58,22 +57,10 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   path.join(__dirname, 'index.js'),
-  prettier.format(
-    `export const card = \`${chalk.green(boxen(output, options))}\``,
-    {
-      ...require('@ahmedelgabri/prettier-config'),
-      parser: 'babel',
-    },
-  ),
+  `export const card = \`${chalk.green(boxen(output, options))}\``,
 )
 
 fs.writeFileSync(
   path.join(__dirname, 'index.cjs.js'),
-  prettier.format(
-    `module.exports = \`${chalk.green(boxen(output, options))}\``,
-    {
-      ...require('@ahmedelgabri/prettier-config'),
-      parser: 'babel',
-    },
-  ),
+  `module.exports = \`${chalk.green(boxen(output, options))}\``,
 )
