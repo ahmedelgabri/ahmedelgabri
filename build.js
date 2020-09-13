@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const boxen = require('boxen')
+const prettier = require('prettier')
 
 // Define options for Boxen
 const options = {
@@ -53,4 +54,15 @@ const output = `${heading}
 fs.writeFileSync(
   path.join(__dirname, 'bin/output'),
   chalk.green(boxen(output, options)),
+)
+
+fs.writeFileSync(
+  path.join(__dirname, 'index.js'),
+  prettier.format(
+    `export const card = \`${chalk.green(boxen(output, options))}\``,
+    {
+      ...require('@ahmedelgabri/prettier-config'),
+      parser: 'babel',
+    },
+  ),
 )

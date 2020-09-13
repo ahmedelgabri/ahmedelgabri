@@ -5,7 +5,7 @@
   "description": "A personal card for Ahmed El Gabri (@ahmedelgabri)",
   "license": "MIT",
   "homepage": "https://gabri.me",
-  "main": "/bin/card.js",
+  "main": "index.js",
   "bin": {
     "ahmedelgabri": "./bin/card.js"
   },
@@ -25,7 +25,8 @@
   ],
   "files": [
     "bin/card.js",
-    "bin/output"
+    "bin/output",
+    "index.js"
   ],
   "repository": {
     "type": "git",
@@ -36,8 +37,10 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@ahmedelgabri/prettier-config": "^5.0.0",
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
+    "prettier": "^2.1.1",
     "standard": "^14.3.4"
   }
 }

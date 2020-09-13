@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@ahmedelgabri/prettier-config@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ahmedelgabri/prettier-config/-/prettier-config-5.0.0.tgz#3377a140f120b7e78c0287aeb80dad53484b2ce1"
+  integrity sha512-xX/Tj9RtHVVcLNKn2sXqgZwU2kkl3qfOwfkCD3SYgt7gWtmJ68cRTq9ZhkOaLXP7FidRJ2xcluANZjUKFMAaCw==
+
 "@babel/code-frame@^7.0.0":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.8.3.tgz#33e25903d7481181534e12ec0a25f16b6fcf419e"
@@ -1179,6 +1184,11 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
+
+prettier@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.1.1.tgz#d9485dd5e499daa6cb547023b87a6cf51bee37d6"
+  integrity sha512-9bY+5ZWCfqj3ghYBLxApy2zf6m+NJo5GzmLTpr9FsApsfjriNnS2dahWReHMi7qNPhhHl9SYHJs2cHZLgexNIw==
 
 progress@^2.0.0:
   version "2.0.3"
