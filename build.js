@@ -66,3 +66,14 @@ fs.writeFileSync(
     },
   ),
 )
+
+fs.writeFileSync(
+  path.join(__dirname, 'index.cjs.js'),
+  prettier.format(
+    `module.exports = \`${chalk.green(boxen(output, options))}\``,
+    {
+      ...require('@ahmedelgabri/prettier-config'),
+      parser: 'babel',
+    },
+  ),
+)
