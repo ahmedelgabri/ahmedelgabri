@@ -9,31 +9,29 @@ const options = {
 }
 
 // Text + chalk definitions
-const data = {
-  name: chalk.white('Ahmed El Gabri /'),
-  handle: chalk.cyan('ahmedelgabri'),
-  work: chalk.white('Tech Lead, Platform @Mirohq'),
-  twitter: chalk.cyan('https://twitter.com/ahmedelgabri'),
-  github: chalk.cyan('https://github.com/ahmedelgabri'),
-  linkedin: chalk.cyan('https://linkedin.com/in/ahmedelgabri'),
-  web: chalk.cyan('https://gabri.me'),
-  npx: chalk.white('npx ahmedelgabri'),
-  labelWork: chalk.white.bold('      Work: '),
-  labelTwitter: chalk.white.bold('   Twitter: '),
-  labelGitHub: chalk.white.bold('    GitHub: '),
-  labelLinkedIn: chalk.white.bold('  LinkedIn: '),
-  labelWeb: chalk.white.bold('       Web: '),
-  labelCard: chalk.white.bold('      Card: '),
-}
+const name = chalk.reset('Ahmed El Gabri')
+const handle = chalk.cyan('ahmedelgabri')
+const work = chalk.reset('Tech Lead, Platform @MiroHQ')
+const twitter = chalk.cyan(`https://twitter.com/${handle}`)
+const github = chalk.cyan(`https://github.com/${handle}`)
+const linkedin = chalk.cyan(`https://linkedin.com/in/${handle}`)
+const web = chalk.cyan('https://gabri.me')
+const npx = chalk.reset(`npx ${handle}`)
+const labelWork = chalk.reset.bold('      Work: ')
+const labelTwitter = chalk.reset.bold('   Twitter: ')
+const labelGitHub = chalk.reset.bold('    GitHub: ')
+const labelLinkedIn = chalk.reset.bold('  LinkedIn: ')
+const labelWeb = chalk.reset.bold('       Web: ')
+const labelCard = chalk.reset.bold('      Card: ')
 
 // Actual strings we're going to output
-const heading = `${data.name} ${data.handle}`
-const working = `${data.labelWork} ${data.work}`
-const twittering = `${data.labelTwitter} ${data.twitter}`
-const githubing = `${data.labelGitHub} ${data.github}`
-const linkedining = `${data.labelLinkedIn} ${data.linkedin}`
-const webing = `${data.labelWeb} ${data.web}`
-const carding = `${data.labelCard} ${data.npx}`
+const heading = `${name} / ${handle}`
+const working = `${labelWork} ${work}`
+const twittering = `${labelTwitter} ${twitter}`
+const githubing = `${labelGitHub} ${github}`
+const linkedining = `${labelLinkedIn} ${linkedin}`
+const webing = `${labelWeb} ${web}`
+const carding = `${labelCard} ${npx}`
 
 // Put all our output together into a single variable so we can use boxen effectively
 const output = `${heading}

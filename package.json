@@ -38,9 +38,9 @@
   "dependencies": {},
   "devDependencies": {
     "@ahmedelgabri/prettier-config": "^5.0.0",
-    "boxen": "^4.2.0",
-    "chalk": "^4.1.0",
-    "prettier": "^2.1.1",
-    "standard": "^14.3.4"
+    "boxen": "^5.0.1",
+    "chalk": "^4.1.1",
+    "prettier": "^2.3.0",
+    "standard": "^16.0.3"
   }
 }
