@@ -11,7 +11,7 @@ const options = {
 // Text + chalk definitions
 const name = chalk.reset('Ahmed El Gabri')
 const handle = chalk.cyan('ahmedelgabri')
-const work = chalk.reset('Tech Lead, Platform @MiroHQ')
+const work = chalk.reset('Staff Software Engineer @MiroHQ')
 const twitter = chalk.cyan(`https://twitter.com/${handle}`)
 const github = chalk.cyan(`https://github.com/${handle}`)
 const linkedin = chalk.cyan(`https://linkedin.com/in/${handle}`)
