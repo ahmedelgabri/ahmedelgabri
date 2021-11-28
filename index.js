@@ -46,4 +46,5 @@ const output = `${heading}
 
 module.exports = {
   getCard: () => chalk.green(boxen(output, options)),
+  getPlainCard: () => boxen(output, options),
 }
