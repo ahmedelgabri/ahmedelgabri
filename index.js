@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+const pc = require('picocolors')
 const boxen = require('boxen')
 
 // Define options for Boxen
@@ -8,21 +8,21 @@ const options = {
   borderStyle: 'round',
 }
 
-// Text + chalk definitions
-const name = chalk.reset('Ahmed El Gabri')
-const handle = chalk.cyan('ahmedelgabri')
-const work = chalk.reset('Staff Software Engineer @MiroHQ')
-const twitter = chalk.cyan(`https://twitter.com/${handle}`)
-const github = chalk.cyan(`https://github.com/${handle}`)
-const linkedin = chalk.cyan(`https://linkedin.com/in/${handle}`)
-const web = chalk.cyan('https://gabri.me')
-const npx = chalk.reset(`npx ${handle}`)
-const labelWork = chalk.reset.bold('      Work: ')
-const labelTwitter = chalk.reset.bold('   Twitter: ')
-const labelGitHub = chalk.reset.bold('    GitHub: ')
-const labelLinkedIn = chalk.reset.bold('  LinkedIn: ')
-const labelWeb = chalk.reset.bold('       Web: ')
-const labelCard = chalk.reset.bold('      Card: ')
+// Text + pc definitions
+const name = pc.reset('Ahmed El Gabri')
+const handle = pc.cyan('ahmedelgabri')
+const work = pc.reset('Staff Software Engineer @MiroHQ')
+const twitter = pc.cyan(`https://twitter.com/${handle}`)
+const github = pc.cyan(`https://github.com/${handle}`)
+const linkedin = pc.cyan(`https://linkedin.com/in/${handle}`)
+const web = pc.cyan('https://gabri.me')
+const npx = pc.reset(`npx ${handle}`)
+const labelWork = pc.bold(pc.reset('      Work: '))
+const labelTwitter = pc.bold(pc.reset('   Twitter: '))
+const labelGitHub = pc.bold(pc.reset('    GitHub: '))
+const labelLinkedIn = pc.bold(pc.reset('  LinkedIn: '))
+const labelWeb = pc.bold(pc.reset('       Web: '))
+const labelCard = pc.bold(pc.reset('      Card: '))
 
 // Actual strings we're going to output
 const heading = `${name} / ${handle}`
@@ -45,6 +45,6 @@ const output = `${heading}
   ${carding}`
 
 module.exports = {
-  getCard: () => chalk.green(boxen(output, options)),
+  getCard: () => pc.green(boxen(output, options)),
   getPlainCard: () => output,
 }

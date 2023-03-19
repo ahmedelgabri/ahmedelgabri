@@ -37,9 +37,11 @@
   },
   "devDependencies": {
     "@ahmedelgabri/prettier-config": "^5.0.0",
-    "boxen": "^5.1.2",
-    "chalk": "^4.1.2",
     "prettier": "^2.5.0",
     "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "picocolors": "^1.0.0",
+    "boxen": "^5.1.2"
   }
 }
