@@ -51,19 +51,13 @@ const output = `${working}
 
   ${carding}`
 
-export function getCard({no_color = false} = {}) {
-	if (no_color) {
-		process.env.NO_COLOR = 1
-	}
+export function getCard() {
 	return boxen(output, {
 		...options,
 		borderColor: process.env.NO_COLOR ? undefined : 'blue',
 	})
 }
 
-export function getPlainCard({no_color = true} = {}) {
-	if (no_color) {
-		process.env.NO_COLOR = 1
-	}
+export function getPlainCard() {
 	return output
 }
