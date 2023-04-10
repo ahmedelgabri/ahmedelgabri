@@ -35,13 +35,14 @@
   "bugs": {
     "url": "https://github.com/ahmedelgabri/ahmedelgabri/issues"
   },
-  "devDependencies": {
-    "@ahmedelgabri/prettier-config": "^5.0.0",
-    "prettier": "^2.5.0",
-    "standard": "^16.0.4"
-  },
-  "dependencies": {
-    "picocolors": "^1.0.0",
-    "boxen": "^5.1.2"
-  }
+	"devDependencies": {
+		"@ahmedelgabri/prettier-config": "^7.0.0",
+		"esbuild": "^0.17.16",
+		"prettier": "^2.8.7",
+		"standard": "^17.0.0"
+	},
+	"dependencies": {
+		"boxen": "^7.0.2",
+		"picocolors": "^1.0.0"
+	}
 }
