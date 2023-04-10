@@ -1,40 +1,40 @@
 {
-  "name": "ahmedelgabri",
-  "author": "Ahmed El Gabri <ahmed@gabri.me> (https://gabri.me)",
-  "version": "6.0.0",
-  "description": "A personal card for Ahmed El Gabri (@ahmedelgabri)",
-  "license": "MIT",
-  "homepage": "https://gabri.me",
-  "main": "index.js",
-  "bin": {
-    "ahmedelgabri": "./bin/card.js"
-  },
-  "scripts": {
-    "prepublish": "npm run build",
-    "build": "node build.js",
-    "dev": "npm run build && node ./bin/card.js",
-    "lint": "standard"
-  },
-  "keywords": [
-    "card",
-    "npm",
-    "npm card",
-    "npx",
-    "npx card",
-    "business card"
-  ],
-  "files": [
-    "bin/card.js",
-    "bin/output",
-    "index.js"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ahmedelgabri/ahmedelgabri.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ahmedelgabri/ahmedelgabri/issues"
-  },
+	"name": "ahmedelgabri",
+	"author": "Ahmed El Gabri <ahmed@gabri.me> (https://gabri.me)",
+	"version": "6.0.0",
+	"description": "A personal card for Ahmed El Gabri (@ahmedelgabri)",
+	"license": "MIT",
+	"homepage": "https://gabri.me",
+	"main": "index.mjs",
+	"type": "module",
+	"bin": {
+		"ahmedelgabri": "./bin/card.cjs"
+	},
+	"scripts": {
+		"prepublish": "pnpm run build",
+		"build": "esbuild card.mjs --bundle --minify --analyze --outfile=bin/card.cjs --platform=node",
+		"dev": "pnpm run build --watch",
+		"lint": "standard"
+	},
+	"keywords": [
+		"card",
+		"npm",
+		"npm card",
+		"npx",
+		"npx card",
+		"business card"
+	],
+	"files": [
+		"bin/card.cjs",
+		"index.mjs"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ahmedelgabri/ahmedelgabri.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ahmedelgabri/ahmedelgabri/issues"
+	},
 	"devDependencies": {
 		"@ahmedelgabri/prettier-config": "^7.0.0",
 		"esbuild": "^0.17.16",
