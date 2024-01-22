@@ -7,7 +7,7 @@
   <br>
 <br>
 <br>
-  <pre><code>curl -L gabri.me/api/card</code></pre>
+  <pre><code>curl -L gabri.me/card</code></pre>
 	or
 	<br>
 	<br>
