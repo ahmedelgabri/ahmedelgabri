@@ -14,12 +14,8 @@
     "dev": "deno run --allow-env --watch mod.ts",
     "build": "deno run -A scripts/build.ts",
     "publish": "deno run -A scripts/publish.ts",
+    "gzip": "deno run -A scripts/gzip.ts",
     "publish:npm": "cd npm && npm publish"
   },
-  "exclude": [
-    "npm",
-    ".direnv",
-    ".envrc",
-    "shell.nix"
-  ]
+  "exclude": ["npm", ".direnv", ".envrc", "shell.nix"]
 }

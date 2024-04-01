@@ -17,10 +17,10 @@ jobs:
         run: deno fmt --check
 
       - name: Linting
-        run: deno lint && deno doc --lint
+        run: deno lint && deno doc --lint mod.ts
 
       - name: Type Check
-        run: deno check scripts/*.ts *.ts
+        run: deno check ./scripts/*.ts ./*.ts
 
   build:
     runs-on: ubuntu-22.04
@@ -35,7 +35,7 @@ jobs:
   size:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x

@@ -1,9 +1,4 @@
 import { build, emptyDir } from "@deno/dnt";
-import * as semver from "@std/semver";
-import * as a from "@std/assert";
-
-const version = semver.canParse(Deno.args[0]);
-a.assert(version, `Invalid version! ${version}`);
 
 await emptyDir("./npm");
 
