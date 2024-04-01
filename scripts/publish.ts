@@ -68,7 +68,7 @@ await run({
 
 await run({
   label: "git tag",
-  cmd: ["git", "tag", version],
+  cmd: ["git", "tag", `v${version}`],
 });
 
 await run({
