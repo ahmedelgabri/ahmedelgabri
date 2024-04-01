@@ -64,16 +64,8 @@ export function getCard(): string {
   });
 }
 
-/**
- * Returns personal card containing personal information without ascii art or
- * colors
- *
- * @returns {string}
- */
-export function getPlainCard(): string {
-  return output;
-}
-
+// Needed for deno run ...
+// card.ts is needed for npx ...
 if (import.meta.main) {
   console.log(getCard());
 }

@@ -12,8 +12,8 @@ await build({
     "./mod.ts",
     {
       kind: "bin",
-      name: "ahmedelgabri", // command name
-      path: "./mod.ts",
+      name: "ahmedelgabri",
+      path: "./card.ts",
     },
   ],
   outDir: "./npm",
