@@ -12,9 +12,9 @@ const twitter = c.blue(`https://twitter.com/${handle}`);
 const github = c.blue(`https://github.com/${handle}`);
 const linkedin = c.blue(`https://linkedin.com/in/${handle}`);
 const web = c.blue(`https://${domain}.me`);
-const npx = c.reset(`npx ${handle}`);
+const npx = c.reset(`npx ${handle}@latest`);
 const deno = c.reset(
-  `deno run --allow-env jsr:@${c.blue(jsrUserName as string)}/card`,
+  `deno run -r --allow-env jsr:@${c.blue(jsrUserName as string)}/card`,
 );
 const labelWork = c.gray("      Work: ");
 const labelTwitter = c.dim(" Twitter/X: ");

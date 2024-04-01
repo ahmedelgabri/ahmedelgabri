@@ -13,9 +13,9 @@
 	<br>
 	<br>
     <strong>Deno</strong>
-  <pre><code>deno run --allow-env jsr:@ahmed/card</code></pre>
+  <pre><code>deno run -r --allow-env jsr:@ahmed/card</code></pre>
 	<br>
 	<br>
     <strong>node</strong>
-  <pre><code>npx ahmedelgabri</code></pre>
+  <pre><code>npx ahmedelgabri@latest</code></pre>
 </div>
