@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  deno:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Code Style
+        run: deno fmt --check
+
+      - name: Linting
+        run: deno lint && deno doc --lint
+
+      - name: Type Check
+        run: deno check scripts/*.ts *.ts
+
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - run: deno task build
+
+  size:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - run: deno task gzip
