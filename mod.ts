@@ -15,7 +15,9 @@ const linkedin = c.blue(`https://linkedin.com/in/${handle}`);
 const mastodon = c.blue(`https://mastodon.online/@${mastodonHandle}`);
 const web = c.blue("https://gabri.me");
 const npx = c.reset(`npx ${handle}`);
-const deno = c.reset(`deno run jsr:@${c.blue(jsrUserName as string)}/card`);
+const deno = c.reset(
+  `deno run --allow-env jsr:@${c.blue(jsrUserName as string)}/card`,
+);
 const labelWork = c.gray("      Work: ");
 const labelTwitter = c.dim(" Twitter: ");
 const labelGitHub = c.dim("  GitHub: ");

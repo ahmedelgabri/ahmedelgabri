@@ -7,9 +7,15 @@
   <br>
 <br>
 <br>
+    <strong>web</strong>
+    <br>
   <pre><code>curl -L gabri.me/card</code></pre>
-	or
 	<br>
 	<br>
+    <strong>Deno</strong>
+  <pre><code>deno run --allow-env jsr:@ahmed/card</code></pre>
+	<br>
+	<br>
+    <strong>node</strong>
   <pre><code>npx ahmedelgabri</code></pre>
 </div>
