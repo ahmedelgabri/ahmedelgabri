@@ -1,6 +1,6 @@
 {
   "exports": "./mod.ts",
-  "version": "8.0.3",
+  "version": "8.0.4",
   "name": "@ahmed/card",
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.1",
@@ -17,5 +17,10 @@
     "gzip": "deno run -A scripts/gzip.ts",
     "publish:npm": "cd npm && npm publish"
   },
-  "exclude": ["npm", ".direnv", ".envrc", "shell.nix"]
+  "exclude": [
+    "npm",
+    ".direnv",
+    ".envrc",
+    "shell.nix"
+  ]
 }
