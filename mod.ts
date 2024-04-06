@@ -7,7 +7,7 @@ const jsrUserName = fullname.toLowerCase().split(" ").at(0);
 const domain = fullname.toLowerCase().split(" ").at(-1);
 
 const handle = c.blue(social);
-const work = c.reset(`Staff Software Engineer ${c.yellow("@Mirohq")}`);
+const work = c.reset(`Senior Staff Software Engineer ${c.yellow("@Mirohq")}`);
 const twitter = c.blue(`https://twitter.com/${handle}`);
 const github = c.blue(`https://github.com/${handle}`);
 const linkedin = c.blue(`https://linkedin.com/in/${handle}`);
