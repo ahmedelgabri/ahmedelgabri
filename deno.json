@@ -1,6 +1,6 @@
 {
   "exports": "./mod.ts",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "name": "@ahmed/card",
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.1",
