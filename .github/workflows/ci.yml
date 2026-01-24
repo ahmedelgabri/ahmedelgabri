@@ -22,6 +22,9 @@ jobs:
       - name: Type Check
         run: deno check ./scripts/*.ts ./*.ts
 
+      - name: Test
+        run: deno task test
+
   build:
     runs-on: ubuntu-22.04
     steps:
