@@ -22,6 +22,9 @@ deno task dev
 # Build npm package (generates ./npm directory)
 deno task build
 
+# Run tests
+deno task test
+
 # Lint and format
 deno fmt --check
 deno lint
