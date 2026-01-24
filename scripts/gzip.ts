@@ -1,4 +1,4 @@
-import { build } from "npm:esbuild@^0.20.2";
+import { build } from "esbuild";
 import { denoPlugins } from "@luca/esbuild-deno-loader";
 
 function toAbsolute(id: string) {

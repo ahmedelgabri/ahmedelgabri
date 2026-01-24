@@ -1,5 +1,5 @@
 import * as c from "@std/fmt/colors";
-import boxen from "npm:boxen@7.1.1";
+import boxen from "boxen";
 
 const fullname = "Ahmed El Gabri";
 const social = fullname.toLowerCase().replaceAll(" ", "");
