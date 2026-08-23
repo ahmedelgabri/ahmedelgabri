@@ -79,6 +79,7 @@ deno task publish <version> [--access=public]
 - Treat `npm/` as generated output; change the TypeScript source or build script instead of editing it directly.
 - Keep `mod.ts` free of runtime globals and runtime dependencies; keep environment detection in `cli.ts` and `card.ts` minimal.
 - Preserve `NO_COLOR` support when changing terminal styling.
+- `README.md` is rendered on Ahmed's GitHub profile; preserve its minimal profile layout and limit changes to concise user-facing card commands unless explicitly requested.
 - Preserve the byte-exact colored and plain fixtures unless the visual output is intentionally changing.
 - Update `deno.lock` whenever dependency resolution changes.
 - Add or update tests in `mod_test.ts` and the shared runtime contract for user-visible changes.
