@@ -1,3 +1,3 @@
-import { getCard } from "./mod.ts";
+import { getCard } from './mod.ts'
 
-console.log(getCard());
+console.log(getCard())
