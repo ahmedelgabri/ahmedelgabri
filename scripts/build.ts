@@ -45,7 +45,7 @@ const packageJson = {
 		'./package.json': './package.json',
 	},
 	bin: {
-		ahmedelgabri: './dist/card.js',
+		ahmedelgabri: 'dist/card.js',
 	},
 	engines: {
 		node: '>=22',

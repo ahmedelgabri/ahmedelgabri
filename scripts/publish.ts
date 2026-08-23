@@ -8,28 +8,35 @@ type Command = {
 	cwd?: string
 }
 
-const decoder = new TextDecoder()
-
 async function run({ label, command, args, cwd }: Command): Promise<void> {
 	console.log(`-> ${label}`)
-	const result = await new Deno.Command(command, { args, cwd }).output()
-	const stdout = decoder.decode(result.stdout)
-	const stderr = decoder.decode(result.stderr)
-	if (stdout) console.log(stdout)
-	if (stderr) console.error(stderr)
+	const result = await new Deno.Command(command, {
+		args,
+		cwd,
+		stdin: 'inherit',
+		stdout: 'inherit',
+		stderr: 'inherit',
+	}).output()
 	assert(result.success, label)
 }
 
 const parsedVersion = semver.tryParse(Deno.args[0])
 assert(parsedVersion, `Invalid version: ${Deno.args[0]}`)
 const version = semver.format(parsedVersion)
-const npmArgs = ['publish']
-if (Deno.args[1]) npmArgs.push(Deno.args[1])
+const npmArgs = ['publish', ...Deno.args.slice(1)]
 
 const configPath = './deno.jsonc'
-const config = JSON.parse(await Deno.readTextFile(configPath))
-config.version = version
-await Deno.writeTextFile(configPath, `${JSON.stringify(config, null, '\t')}\n`)
+const configContents = await Deno.readTextFile(configPath)
+const config = JSON.parse(configContents)
+const currentVersion = `\t"version": "${config.version}",`
+assert(configContents.includes(currentVersion), 'Version field not found')
+
+if (config.version !== version) {
+	await Deno.writeTextFile(
+		configPath,
+		configContents.replace(currentVersion, `\t"version": "${version}",`),
+	)
+}
 
 await run({
 	label: 'format release metadata',

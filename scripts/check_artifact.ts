@@ -4,6 +4,7 @@ const packageJson = JSON.parse(await Deno.readTextFile('./npm/package.json'))
 assertEquals(packageJson.type, 'module')
 assertEquals(packageJson.dependencies, undefined)
 assertEquals(packageJson.exports['.'].require, undefined)
+assertEquals(packageJson.bin, { ahmedelgabri: 'dist/card.js' })
 
 const forbidden = [
 	['CommonJS require', /\brequire\s*\(/],
