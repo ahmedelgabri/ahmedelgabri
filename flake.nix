@@ -33,6 +33,7 @@
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              bun
               deno
               nodejs
             ];

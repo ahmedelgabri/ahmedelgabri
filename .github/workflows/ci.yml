@@ -2,45 +2,50 @@ name: CI
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  deno:
-    runs-on: ubuntu-22.04
+  quality:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with:
           deno-version: vx.x.x
 
-      - name: Code Style
+      - name: Check formatting
         run: deno fmt --check
 
-      - name: Linting
-        run: deno lint && deno doc --lint mod.ts
+      - name: Lint
+        run: deno lint && deno doc --lint mod.ts cli.ts
 
-      - name: Type Check
-        run: deno check ./scripts/*.ts ./*.ts
+      - name: Type-check
+        run: deno check ./scripts/*.ts ./*.ts tests/contract.js
 
-      - name: Test
+      - name: Test source
         run: deno task test
 
-  build:
-    runs-on: ubuntu-22.04
+  runtimes:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with:
           deno-version: vx.x.x
-
-      - run: deno task build
-
-  size:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v4
         with:
-          deno-version: vx.x.x
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
 
-      - run: deno task gzip
+      - name: Test built artifact in Deno, Node.js, and Bun
+        run: deno task test:artifact
+
+      - name: Test built artifact in workerd
+        run: deno task test:workerd
+
+      - name: Validate package
+        run: deno task check:package
+
+      - name: Report bundle size
+        run: deno task gzip
