@@ -53,9 +53,7 @@ export default {
 
 ```sh
 deno task test
-deno task build
-deno task test:artifact
-deno task test:workerd
+deno task test:runtimes
 deno task check:package
 deno task gzip
 ```

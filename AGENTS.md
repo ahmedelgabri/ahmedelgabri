@@ -32,11 +32,8 @@ deno task test
 # Build the generated npm package
 deno task build [version]
 
-# Test the built artifact in Deno, Node.js, and Bun
-deno task test:artifact
-
-# Test the built artifact in workerd
-deno task test:workerd
+# Build once and test the artifact in Deno, Node.js, Bun, and workerd
+deno task test:runtimes
 
 # Validate the ESM package and its type declarations
 deno task check:package
@@ -71,6 +68,7 @@ deno task publish <version> [--access=public]
 - `tests/contract.js` defines the shared runtime contract used by Deno, Node.js, Bun, and workerd.
 - `scripts/build.ts` uses TypeScript 5.9 with `rewriteRelativeImportExtensions` to generate ESM, declarations, and the npm executable in `npm/`.
 - `scripts/check_artifact.ts` rejects CommonJS, Node built-ins, and Deno shims in the generated package.
+- `scripts/test_artifact.ts` exercises the built library and CLI in Deno, Node.js, and Bun; workerd runs the same contract through `tests/workerd.capnp`.
 - `scripts/gzip.ts` bundles the dependency-free module with esbuild and reports minified and gzipped sizes.
 - `scripts/publish.ts` coordinates the npm and JSR release workflow and uses Jujutsu for release metadata.
 - `deno.jsonc` defines package metadata, import mappings, tasks, and formatter settings.

@@ -14,11 +14,15 @@ function assertEquals(actual, expected, label) {
  * @returns {void}
  */
 export function assertCardContract(card, golden) {
-	assertEquals(card.getCard(), golden.color, 'default output')
-	assertEquals(card.getCard({ color: true }), golden.color, 'colored output')
-	assertEquals(card.getCard({ color: false }), golden.plain, 'plain output')
+	const defaultOutput = card.getCard()
+	const coloredOutput = card.getCard({ color: true })
+	const plainOutput = card.getCard({ color: false })
 
-	if (card.getCard({ color: false }).includes('\x1b[')) {
+	assertEquals(defaultOutput, golden.color, 'default output')
+	assertEquals(coloredOutput, golden.color, 'colored output')
+	assertEquals(plainOutput, golden.plain, 'plain output')
+
+	if (plainOutput.includes('\x1b[')) {
 		throw new Error('plain output contains ANSI escape sequences')
 	}
 }

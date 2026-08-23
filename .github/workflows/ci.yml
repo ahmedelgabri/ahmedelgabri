@@ -38,11 +38,8 @@ jobs:
           node-version: 22
       - uses: oven-sh/setup-bun@v2
 
-      - name: Test built artifact in Deno, Node.js, and Bun
-        run: deno task test:artifact
-
-      - name: Test built artifact in workerd
-        run: deno task test:workerd
+      - name: Build and test artifact in all runtimes
+        run: deno task test:runtimes
 
       - name: Validate package
         run: deno task check:package

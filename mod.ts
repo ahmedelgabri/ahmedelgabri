@@ -1,8 +1,10 @@
 const FULL_NAME = 'Ahmed El Gabri'
-const SOCIAL = FULL_NAME.toLowerCase().replaceAll(' ', '')
-const JSR_USER_NAME = FULL_NAME.toLowerCase().split(' ').at(0) as string
-const DOMAIN = FULL_NAME.toLowerCase().split(' ').at(-1)
+const HANDLE = 'ahmedelgabri'
+const JSR_USER = 'ahmed'
+const DOMAIN = 'gabri'
 
+// deno-lint-ignore no-control-regex
+const ANSI_PATTERN = /\x1B\[[0-?]*[ -/]*[@-~]/g
 const CONTENT_WIDTH = 52
 const HORIZONTAL_PADDING = 3
 const HORIZONTAL_MARGIN = 10
@@ -28,22 +30,7 @@ function styler(
 }
 
 function visibleWidth(value: string): number {
-	let escaped = false
-	let width = 0
-
-	for (const character of value) {
-		if (!escaped && character === '\x1b') {
-			escaped = true
-			continue
-		}
-		if (escaped) {
-			if (/[a-zA-Z]/.test(character)) escaped = false
-			continue
-		}
-		width++
-	}
-
-	return width
+	return value.replace(ANSI_PATTERN, '').length
 }
 
 /**
@@ -60,7 +47,7 @@ export function getCard(options: CardOptions = {}): string {
 	const gray = styler(color, 90, 39)
 	const dim = styler(color, 2, 22)
 
-	const handle = blue(SOCIAL)
+	const handle = blue(HANDLE)
 	const work = reset(`Principal Engineer ${yellow('@Mirohq')}`)
 	const twitter = blue(`https://twitter.com/${handle}`)
 	const github = blue(`https://github.com/${handle}`)
@@ -68,7 +55,7 @@ export function getCard(options: CardOptions = {}): string {
 	const web = blue(`https://${DOMAIN}.me`)
 	const npx = reset(`npx ${handle}@latest`)
 	const deno = reset(
-		`deno run -r --allow-env jsr:@${blue(JSR_USER_NAME)}/card`,
+		`deno run -r --allow-env jsr:@${blue(JSR_USER)}/card`,
 	)
 
 	const lines = [

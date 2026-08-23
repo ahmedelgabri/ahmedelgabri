@@ -8,7 +8,7 @@ assertEquals(packageJson.exports['.'].require, undefined)
 const forbidden = [
 	['CommonJS require', /\brequire\s*\(/],
 	['CommonJS exports', /\bmodule\.exports\b/],
-	['Node built-in import', /(?:from\s*|import\s*)['"]node:/],
+	['Node built-in specifier', /['"]node:[^'"]*['"]/],
 	['Deno shim', /@deno\/shim/],
 ] as const
 

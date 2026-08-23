@@ -1,5 +1,4 @@
 import { assert } from '@std/assert'
-import * as clrs from '@std/fmt/colors'
 import * as semver from '@std/semver'
 
 type Command = {
@@ -12,7 +11,7 @@ type Command = {
 const decoder = new TextDecoder()
 
 async function run({ label, command, args, cwd }: Command): Promise<void> {
-	console.log(`${clrs.yellow('-> ')}${clrs.blue(label)}`)
+	console.log(`-> ${label}`)
 	const result = await new Deno.Command(command, { args, cwd }).output()
 	const stdout = decoder.decode(result.stdout)
 	const stderr = decoder.decode(result.stderr)
@@ -43,19 +42,9 @@ await run({
 	args: ['task', 'test'],
 })
 await run({
-	label: 'build npm package',
+	label: 'build and test npm package in all runtimes',
 	command: 'deno',
-	args: ['task', 'build', version],
-})
-await run({
-	label: 'test npm package in Deno, Node.js, and Bun',
-	command: 'deno',
-	args: ['task', 'test:artifact'],
-})
-await run({
-	label: 'test npm package in workerd',
-	command: 'deno',
-	args: ['task', 'test:workerd'],
+	args: ['task', 'test:runtimes'],
 })
 await run({
 	label: 'validate npm package',

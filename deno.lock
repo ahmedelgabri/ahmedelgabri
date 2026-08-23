@@ -2,7 +2,6 @@
   "version": "5",
   "specifiers": {
     "jsr:@std/assert@1": "1.0.17",
-    "jsr:@std/fmt@1": "1.0.9",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/semver@1": "1.0.8",
     "npm:@arethetypeswrong/cli@0.18.5": "0.18.5",
@@ -16,9 +15,6 @@
       "dependencies": [
         "jsr:@std/internal"
       ]
-    },
-    "@std/fmt@1.0.9": {
-      "integrity": "2487343e8899fb2be5d0e3d35013e54477ada198854e52dd05ed0422eddcabe0"
     },
     "@std/internal@1.0.12": {
       "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
@@ -521,11 +517,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@deno/dnt@~0.41.3",
-      "jsr:@luca/esbuild-deno-loader@~0.10.3",
       "jsr:@std/assert@1",
-      "jsr:@std/fmt@1",
-      "jsr:@std/path@1",
       "jsr:@std/semver@1",
       "npm:esbuild@~0.27.2"
     ]
