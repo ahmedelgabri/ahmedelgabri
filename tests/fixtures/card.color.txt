@@ -1,0 +1,22 @@
+
+
+
+
+
+[34m          ╭ Ahmed El Gabri ──────────────────────────────────────────╮[39m
+          [34m│[39m                                                          [34m│[39m
+          [34m│[39m   [90m      Work: [39m [0mPrincipal Engineer [33m@Mirohq[39m[0m                [34m│[39m
+          [34m│[39m                                                          [34m│[39m
+          [34m│[39m   [2m    GitHub: [22m [34mhttps://github.com/[34mahmedelgabri[34m[39m           [34m│[39m
+          [34m│[39m   [2m  LinkedIn: [22m [34mhttps://linkedin.com/in/[34mahmedelgabri[34m[39m      [34m│[39m
+          [34m│[39m   [2m Twitter/X: [22m [34mhttps://twitter.com/[34mahmedelgabri[34m[39m          [34m│[39m
+          [34m│[39m   [2m       Web: [22m [34mhttps://gabri.me[39m                          [34m│[39m
+          [34m│[39m                                                          [34m│[39m
+          [34m│[39m   [90m      Deno: [39m [0mdeno run -r --allow-env jsr:@[34mahmed[39m/card[0m   [34m│[39m
+          [34m│[39m   [90m      Node: [39m [0mnpx [34mahmedelgabri[39m@latest[0m                   [34m│[39m
+          [34m│[39m                                                          [34m│[39m
+[34m          ╰──────────────────────────────────────────────────────────╯[39m
+
+
+
+

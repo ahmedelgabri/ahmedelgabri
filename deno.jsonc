@@ -1,5 +1,9 @@
 {
-	"exports": "./mod.ts",
+	"exports": {
+		".": "./cli.ts",
+		"./cli": "./cli.ts",
+		"./mod": "./mod.ts"
+	},
 	"version": "8.1.0",
 	"name": "@ahmed/card",
 	"unstable": ["fmt-component", "fmt-sql"],
@@ -10,12 +14,11 @@
 		"@std/fmt": "jsr:@std/fmt@^1.0.0",
 		"@std/path": "jsr:@std/path@^1.0.0",
 		"@std/semver": "jsr:@std/semver@^1.0.0",
-		"boxen": "npm:boxen@^8.0.1",
 		"esbuild": "npm:esbuild@^0.27.2"
 	},
 	"tasks": {
-		"dev": "deno run --allow-env --watch mod.ts",
-		"test": "deno test --allow-env",
+		"dev": "deno run --allow-env --watch cli.ts",
+		"test": "deno test --allow-read --allow-run",
 		"build": "deno run -A scripts/build.ts",
 		"publish": "deno run -A scripts/publish.ts",
 		"gzip": "deno run -A scripts/gzip.ts",

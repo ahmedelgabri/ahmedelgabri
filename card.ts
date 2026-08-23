@@ -1,3 +1,5 @@
-import { getCard } from './mod.ts'
+#!/usr/bin/env node
 
-console.log(getCard())
+import { run } from './cli.ts'
+
+run()

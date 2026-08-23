@@ -1,36 +1,42 @@
-import { assertEquals, assertStringIncludes } from '@std/assert'
-import { getCard } from './mod.ts'
+import { assertEquals } from '@std/assert'
+import { run } from './cli.ts'
+import * as card from './mod.ts'
+import { assertCardContract } from './tests/contract.js'
 
-// Strip ANSI escape codes for testing
-function stripAnsi(str: string): string {
-	// deno-lint-ignore no-control-regex
-	return str.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, '')
+const golden = {
+	color: await Deno.readTextFile('./tests/fixtures/card.color.txt'),
+	plain: await Deno.readTextFile('./tests/fixtures/card.plain.txt'),
 }
 
-Deno.test('getCard returns a string', () => {
-	const card = getCard()
-	assertEquals(typeof card, 'string')
+Deno.test('card matches the shared rendering contract', () => {
+	assertCardContract(card, golden)
 })
 
-Deno.test('getCard contains expected content', () => {
-	const card = stripAnsi(getCard())
-	assertStringIncludes(card, 'Ahmed El Gabri')
-	assertStringIncludes(card, 'github.com/ahmedelgabri')
-	assertStringIncludes(card, 'linkedin.com/in/ahmedelgabri')
-	assertStringIncludes(card, 'gabri.me')
+Deno.test('CLI prints the card and a final newline', () => {
+	let output = ''
+	run((card) => output = `${card}\n`)
+	assertEquals(output, `${golden.color}\n`)
 })
 
-Deno.test('getCard respects NO_COLOR env var', () => {
-	const originalNoColor = Deno.env.get('NO_COLOR')
+Deno.test('CLI does not require environment permission', async () => {
+	const command = new Deno.Command(Deno.execPath(), {
+		args: ['run', './card.ts'],
+		clearEnv: true,
+	})
+	const result = await command.output()
 
-	Deno.env.set('NO_COLOR', '1')
-	const cardNoColor = getCard()
+	assertEquals(result.success, true)
+	assertEquals(new TextDecoder().decode(result.stdout), `${golden.color}\n`)
+})
 
-	if (originalNoColor !== undefined) {
-		Deno.env.set('NO_COLOR', originalNoColor)
-	} else {
-		Deno.env.delete('NO_COLOR')
-	}
+Deno.test('CLI respects NO_COLOR', async () => {
+	const command = new Deno.Command(Deno.execPath(), {
+		args: ['run', './card.ts'],
+		clearEnv: true,
+		env: { NO_COLOR: '1' },
+	})
+	const result = await command.output()
 
-	assertStringIncludes(cardNoColor, 'Ahmed El Gabri')
+	assertEquals(result.success, true)
+	assertEquals(new TextDecoder().decode(result.stdout), `${golden.plain}\n`)
 })

@@ -1,0 +1,22 @@
+
+
+
+
+
+          ╭ Ahmed El Gabri ──────────────────────────────────────────╮
+          │                                                          │
+          │         Work:  Principal Engineer @Mirohq                │
+          │                                                          │
+          │       GitHub:  https://github.com/ahmedelgabri           │
+          │     LinkedIn:  https://linkedin.com/in/ahmedelgabri      │
+          │    Twitter/X:  https://twitter.com/ahmedelgabri          │
+          │          Web:  https://gabri.me                          │
+          │                                                          │
+          │         Deno:  deno run -r --allow-env jsr:@ahmed/card   │
+          │         Node:  npx ahmedelgabri@latest                   │
+          │                                                          │
+          ╰──────────────────────────────────────────────────────────╯
+
+
+
+
