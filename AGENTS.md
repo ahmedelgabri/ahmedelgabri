@@ -2,19 +2,20 @@
 
 ## Project overview
 
-This repository contains Ahmed El Gabri's personal CLI business card. It renders a styled terminal card with contact details and social links and is distributed for both Deno and Node.js.
+This repository contains Ahmed El Gabri's personal CLI business card. It renders a styled terminal card with contact details and social links and supports Node.js, Deno, Bun, and workerd.
 
 Users can run it with:
 
-- `deno run -r --allow-env jsr:@ahmed/card`
+- `deno run --allow-env jsr:@ahmed/card`
 - `npx ahmedelgabri@latest`
+- `bunx ahmedelgabri@latest`
 - `curl -L gabri.me/card`
 
 ## Toolchain
 
 - Deno manages development, testing, linting, formatting, type checking, and JSR publishing.
-- `@deno/dnt` generates the Node.js package in `npm/`.
-- Nix flakes provide Deno and Node.js through the default development shell.
+- TypeScript emits the ESM-only npm package into the ignored `npm/` directory.
+- Nix flakes provide Bun, Deno, and Node.js through the default development shell.
 - direnv loads the flake automatically through `.envrc`.
 
 Enter the development environment with `nix develop`, or run `direnv allow` when using direnv.
@@ -25,11 +26,20 @@ Enter the development environment with `nix develop`, or run `direnv allow` when
 # Run in watch mode
 deno task dev
 
-# Run tests
+# Run source tests
 deno task test
 
 # Build the generated npm package
-deno task build <version>
+deno task build [version]
+
+# Test the built artifact in Deno, Node.js, and Bun
+deno task test:artifact
+
+# Test the built artifact in workerd
+deno task test:workerd
+
+# Validate the ESM package and its type declarations
+deno task check:package
 
 # Format or check formatting
 deno task format
@@ -37,7 +47,7 @@ deno fmt --check
 
 # Lint and validate documentation
 deno lint
-deno doc --lint mod.ts
+deno doc --lint mod.ts cli.ts
 
 # Type-check source and scripts
 deno check ./scripts/*.ts ./*.ts
@@ -48,30 +58,34 @@ deno task gzip
 # Validate the Nix flake
 nix flake check
 
-# Build and publish npm and JSR releases, then commit, tag, and push
+# Build and publish npm and JSR releases, then describe, tag, and push with Jujutsu
 deno task publish <version> [--access=public]
 ```
 
 ## Architecture
 
-- `mod.ts` contains the card formatting logic and exports `getCard()`. It also supports direct execution with Deno.
-- `card.ts` is the Node.js CLI entry point generated into the npm package.
-- `mod_test.ts` tests the rendered content and `NO_COLOR` behavior.
-- `scripts/build.ts` uses `@deno/dnt` to generate ESM, CommonJS, declarations, and the npm executable in `npm/`.
-- `scripts/gzip.ts` bundles the module with esbuild and reports minified and gzipped sizes.
-- `scripts/publish.ts` coordinates the npm and JSR release workflow.
+- `mod.ts` contains the environment-independent card renderer and exports `getCard()` and `CardOptions`.
+- `cli.ts` contains portable `NO_COLOR` detection and exports the reusable CLI runner.
+- `card.ts` is the Node.js and Bun executable wrapper generated into the npm package.
+- `mod_test.ts` tests the source renderer and CLI behavior against byte-exact golden fixtures.
+- `tests/contract.js` defines the shared runtime contract used by Deno, Node.js, Bun, and workerd.
+- `scripts/build.ts` uses TypeScript 5.9 with `rewriteRelativeImportExtensions` to generate ESM, declarations, and the npm executable in `npm/`.
+- `scripts/check_artifact.ts` rejects CommonJS, Node built-ins, and Deno shims in the generated package.
+- `scripts/gzip.ts` bundles the dependency-free module with esbuild and reports minified and gzipped sizes.
+- `scripts/publish.ts` coordinates the npm and JSR release workflow and uses Jujutsu for release metadata.
 - `deno.jsonc` defines package metadata, import mappings, tasks, and formatter settings.
 - `flake.nix` defines the reproducible development shell and Nix formatter.
 
 ## Development guidelines
 
-- Treat `npm/` as generated output; change the Deno source or build script instead of editing it directly.
-- Keep behavior shared between Deno and Node.js in `mod.ts`; keep `card.ts` as a minimal executable wrapper.
+- Treat `npm/` as generated output; change the TypeScript source or build script instead of editing it directly.
+- Keep `mod.ts` free of runtime globals and runtime dependencies; keep environment detection in `cli.ts` and `card.ts` minimal.
 - Preserve `NO_COLOR` support when changing terminal styling.
+- Preserve the byte-exact colored and plain fixtures unless the visual output is intentionally changing.
 - Update `deno.lock` whenever dependency resolution changes.
-- Add or update tests in `mod_test.ts` for user-visible card changes.
-- Run tests, linting, formatting checks, documentation linting, and type checking before publishing.
+- Add or update tests in `mod_test.ts` and the shared runtime contract for user-visible changes.
+- Run tests, runtime checks, package validation, linting, formatting checks, documentation linting, and type checking before publishing.
 
 ## Publishing
 
-The package is published as `@ahmed/card` on JSR and `ahmedelgabri` on npm. The npm package is generated by `deno task build <version>` and includes transpiled ESM and CommonJS code, type declarations, Deno API shims, the executable entry point, the README, and the license.
+The package is published as `@ahmed/card` on JSR and `ahmedelgabri` on npm. The npm package is generated by `deno task build [version]` and includes ESM code, type declarations, the executable entry point, the README, and the license. It requires Node.js 22 or newer and has no runtime dependencies.
