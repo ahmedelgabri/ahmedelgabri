@@ -1,46 +1,77 @@
-import { build, emptyDir } from '@deno/dnt'
+import { assert } from '@std/assert'
+import * as semver from '@std/semver'
 
-await emptyDir('./npm')
+const config = JSON.parse(await Deno.readTextFile('./deno.jsonc'))
+const requestedVersion = Deno.args[0] ?? config.version
+const parsedVersion = semver.tryParse(requestedVersion)
+assert(parsedVersion, `Invalid version: ${requestedVersion}`)
+const version = semver.format(parsedVersion)
 
-await build({
-	entryPoints: [
-		'./mod.ts',
-		{
-			kind: 'bin',
-			name: 'ahmedelgabri',
-			path: './card.ts',
-		},
+try {
+	await Deno.remove('./npm', { recursive: true })
+} catch (error) {
+	if (!(error instanceof Deno.errors.NotFound)) throw error
+}
+
+const compile = new Deno.Command(Deno.execPath(), {
+	args: [
+		'run',
+		'-A',
+		'npm:typescript@5.9.3/bin/tsc',
+		'--project',
+		'./tsconfig.build.json',
 	],
-	outDir: './npm',
-	shims: {
-		deno: true,
-	},
-	declaration: 'separate',
-	scriptModule: 'cjs',
-	typeCheck: 'both',
-	test: false,
-	importMap: 'deno.jsonc',
-	package: {
-		name: 'ahmedelgabri',
-		version: Deno.args[0],
-		license: 'MIT',
-		description: 'A personal card for Ahmed El Gabri (@ahmedelgabri)',
-		repository: {
-			type: 'git',
-			url: 'git+https://github.com/ahmedelgabri/ahmedelgabri.git',
-		},
-		bugs: {
-			url: 'https://github.com/ahmedelgabri/ahmedelgabri/issues',
-		},
-		author: {
-			name: 'Ahmed El Gabri',
-			email: 'ahmed@gabri.me',
-			url: 'https://gabri.me',
-		},
-		keywords: ['card', 'npm', 'npm card', 'npx', 'npx card', 'business card'],
-	},
-	async postBuild() {
-		await Deno.copyFile('LICENSE', 'npm/LICENSE')
-		await Deno.copyFile('README.md', 'npm/README.md')
-	},
+	stdin: 'inherit',
+	stdout: 'inherit',
+	stderr: 'inherit',
 })
+assert((await compile.output()).success, 'TypeScript compilation failed')
+
+const packageJson = {
+	name: 'ahmedelgabri',
+	version,
+	description: 'A personal card for Ahmed El Gabri (@ahmedelgabri)',
+	type: 'module',
+	types: './dist/mod.d.ts',
+	exports: {
+		'.': {
+			types: './dist/mod.d.ts',
+			default: './dist/mod.js',
+		},
+		'./cli': {
+			types: './dist/cli.d.ts',
+			default: './dist/cli.js',
+		},
+		'./package.json': './package.json',
+	},
+	bin: {
+		ahmedelgabri: './dist/card.js',
+	},
+	engines: {
+		node: '>=22',
+	},
+	sideEffects: false,
+	keywords: ['card', 'npm', 'npm card', 'npx', 'npx card', 'business card'],
+	author: {
+		name: 'Ahmed El Gabri',
+		email: 'ahmed@gabri.me',
+		url: 'https://gabri.me',
+	},
+	repository: {
+		type: 'git',
+		url: 'git+https://github.com/ahmedelgabri/ahmedelgabri.git',
+	},
+	bugs: {
+		url: 'https://github.com/ahmedelgabri/ahmedelgabri/issues',
+	},
+	license: 'MIT',
+}
+
+await Promise.all([
+	Deno.writeTextFile(
+		'./npm/package.json',
+		`${JSON.stringify(packageJson, null, 2)}\n`,
+	),
+	Deno.copyFile('./LICENSE', './npm/LICENSE'),
+	Deno.copyFile('./README.md', './npm/README.md'),
+])

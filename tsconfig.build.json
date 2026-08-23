@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"declaration": true,
+		"lib": ["ES2022", "DOM"],
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"outDir": "./npm/dist",
+		"rewriteRelativeImportExtensions": true,
+		"rootDir": ".",
+		"strict": true,
+		"target": "ES2022"
+	},
+	"include": ["./card.ts", "./cli.ts", "./mod.ts"]
+}

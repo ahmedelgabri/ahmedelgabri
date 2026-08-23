@@ -1,77 +1,100 @@
-import * as path from '@std/path'
-import * as a from '@std/assert'
-import * as semver from '@std/semver'
+import { assert } from '@std/assert'
 import * as clrs from '@std/fmt/colors'
+import * as semver from '@std/semver'
 
-type Data = {
+type Command = {
 	label: string
-	cmd: string[]
+	command: string
+	args: string[]
+	cwd?: string
 }
 
 const decoder = new TextDecoder()
 
-async function run(data: Data) {
-	const {
-		label,
-		cmd: [c, ...args],
-	} = data
+async function run({ label, command, args, cwd }: Command): Promise<void> {
 	console.log(`${clrs.yellow('-> ')}${clrs.blue(label)}`)
-	const command = new Deno.Command(c, { args })
-	const p = await command.output()
-
-	console.log(decoder.decode(p.stderr), decoder.decode(p.stdout))
-	a.assert(p.success, `${label}\n${decoder.decode(p.stderr)}`)
+	const result = await new Deno.Command(command, { args, cwd }).output()
+	const stdout = decoder.decode(result.stdout)
+	const stderr = decoder.decode(result.stderr)
+	if (stdout) console.log(stdout)
+	if (stderr) console.error(stderr)
+	assert(result.success, label)
 }
 
-const validVersion = semver.tryParse(Deno.args[0])
-a.assert(validVersion, `Invalid version! ${Deno.args[0]}`)
+const parsedVersion = semver.tryParse(Deno.args[0])
+assert(parsedVersion, `Invalid version: ${Deno.args[0]}`)
+const version = semver.format(parsedVersion)
+const npmArgs = ['publish']
+if (Deno.args[1]) npmArgs.push(Deno.args[1])
 
-const version = semver.format(validVersion)
+const configPath = './deno.jsonc'
+const config = JSON.parse(await Deno.readTextFile(configPath))
+config.version = version
+await Deno.writeTextFile(configPath, `${JSON.stringify(config, null, '\t')}\n`)
 
-const file = path.resolve('./deno.jsonc')
-const Config = JSON.parse(await Deno.readTextFile(file))
-
+await run({
+	label: 'format release metadata',
+	command: 'deno',
+	args: ['fmt', configPath],
+})
+await run({
+	label: 'run tests',
+	command: 'deno',
+	args: ['task', 'test'],
+})
 await run({
 	label: 'build npm package',
-	cmd: ['deno', 'task', 'build', version],
+	command: 'deno',
+	args: ['task', 'build', version],
 })
-
-Config.version = version
-const contents = JSON.stringify(Config, null, 2)
-await Deno.writeTextFile(file, contents)
-
-// prevent CI error
 await run({
-	label: 'deno fmt',
-	cmd: ['deno', 'fmt', file],
+	label: 'test npm package in Deno, Node.js, and Bun',
+	command: 'deno',
+	args: ['task', 'test:artifact'],
 })
-
+await run({
+	label: 'test npm package in workerd',
+	command: 'deno',
+	args: ['task', 'test:workerd'],
+})
+await run({
+	label: 'validate npm package',
+	command: 'deno',
+	args: ['task', 'check:package'],
+})
+await run({
+	label: 'validate JSR package',
+	command: 'deno',
+	args: ['publish', '--dry-run', '--allow-dirty'],
+})
 await run({
 	label: 'publish npm package',
-	cmd: ['deno', 'task', 'publish:npm', Deno.args[1]],
+	command: 'npm',
+	args: npmArgs,
+	cwd: './npm',
 })
-
 await run({
-	label: 'publish jsr package',
-	cmd: ['deno', 'publish', '--allow-dirty'],
+	label: 'publish JSR package',
+	command: 'deno',
+	args: ['publish', '--allow-dirty'],
 })
-
 await run({
-	label: 'git add',
-	cmd: ['git', 'add', file],
+	label: 'describe release',
+	command: 'jj',
+	args: ['describe', '-m', version],
 })
-
 await run({
-	label: 'git commit',
-	cmd: ['git', 'commit', '-m', version],
+	label: 'advance main bookmark',
+	command: 'jj',
+	args: ['bookmark', 'set', 'main', '-r', '@'],
 })
-
 await run({
-	label: 'git tag',
-	cmd: ['git', 'tag', `v${version}`],
+	label: 'create release tag',
+	command: 'jj',
+	args: ['tag', 'set', `v${version}`, '-r', '@'],
 })
-
 await run({
-	label: 'git push',
-	cmd: ['git', 'push', 'origin', 'main', '--tags'],
+	label: 'push release',
+	command: 'jj',
+	args: ['git', 'push', '--bookmark', 'main', '--tag', `v${version}`],
 })
