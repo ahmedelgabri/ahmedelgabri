@@ -46,3 +46,15 @@ jobs:
 
       - name: Report bundle size
         run: deno task gzip
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [quality, runtimes]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub release
+        run: gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "${GITHUB_REF_NAME#v}" --generate-notes --verify-tag
+        env:
+          GH_TOKEN: ${{ github.token }}
